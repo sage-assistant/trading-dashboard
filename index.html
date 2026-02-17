@@ -3,197 +3,301 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OpenClaw Trading Intelligence Suite</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Trading Intelligence Suite | Powered by OpenClaw</title>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
---bg-primary:#0a0e17;--bg-secondary:#111827;--bg-card:#1a2235;--bg-card-hover:#1f2a42;
---border:#2a3550;--border-light:#354163;
---text-primary:#e8edf5;--text-secondary:#8b95a8;--text-muted:#5a6478;
---accent-blue:#3b82f6;--accent-cyan:#06b6d4;--accent-green:#10b981;--accent-red:#ef4444;
---accent-amber:#f59e0b;--accent-purple:#8b5cf6;--accent-pink:#ec4899;
---gradient-hero:linear-gradient(135deg,#0a0e17 0%,#111d35 50%,#0a0e17 100%);
---gradient-card:linear-gradient(180deg,rgba(26,34,53,0.8) 0%,rgba(17,24,39,0.9) 100%);
---shadow-card:0 4px 24px rgba(0,0,0,0.3);
---shadow-glow:0 0 30px rgba(59,130,246,0.15);
---radius:12px;--radius-sm:8px;--radius-xs:6px;
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --primary: #6366F1; --primary-dark: #4F46E5;
+  --secondary: #8B5CF6; --accent: #06B6D4;
+  --background: #0F172A; --surface: #1E293B;
+  --surface-2: #273548; --text: #F1F5F9;
+  --text-muted: #94A3B8; --border: #334155;
+  --success: #22C55E; --warning: #F59E0B;
+  --error: #EF4444; --info: #06B6D4;
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+  --space-4: 1rem; --space-6: 1.5rem; --space-8: 2rem;
+  --space-12: 3rem; --space-16: 4rem; --space-24: 6rem;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.2);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.3), 0 4px 6px rgba(0,0,0,0.2);
+  --shadow-xl: 0 20px 25px rgba(0,0,0,0.4);
+  --shadow-glow: 0 0 20px rgba(99,102,241,0.15);
+  --radius-sm: 4px; --radius-md: 8px; --radius-lg: 12px; --radius-xl: 16px;
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 150ms; --duration-normal: 300ms;
+  --duration-slow: 500ms; --duration-dramatic: 800ms;
 }
-html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-primary);color:var(--text-primary);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-.mono{font-family:'JetBrains Mono',monospace}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Sora', sans-serif;
+  background: var(--background);
+  color: var(--text);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5 { font-weight: 600; letter-spacing: -0.025em; line-height: 1.2; }
+h1 { font-size: 3.5rem; font-weight: 700; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.25rem; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* Scroll Reveal */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity var(--duration-dramatic) var(--ease-out), transform var(--duration-dramatic) var(--ease-out); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* Hero */
-.hero{min-height:45vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:var(--gradient-hero);position:relative;padding:60px 20px 40px;overflow:hidden}
-.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 0%,rgba(59,130,246,0.08) 0%,transparent 70%);pointer-events:none}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);border-radius:20px;padding:6px 16px;font-size:12px;font-weight:600;color:var(--accent-blue);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:24px}
-.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--accent-green);animation:pulse-dot 2s infinite}
-.hero h1{font-size:clamp(28px,5vw,52px);font-weight:800;letter-spacing:-1px;background:linear-gradient(135deg,#e8edf5 0%,#8b95a8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px}
-.hero p{font-size:clamp(14px,2vw,18px);color:var(--text-secondary);max-width:600px;margin-bottom:8px}
-.hero-sub{font-size:13px!important;color:var(--text-muted)!important}
-.hero-stats{display:flex;gap:40px;margin-top:32px;flex-wrap:wrap;justify-content:center}
-.hero-stat{text-align:center}
-.hero-stat .num{font-size:28px;font-weight:700;color:var(--text-primary);font-family:'JetBrains Mono',monospace}
-.hero-stat .label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.hero {
+  background: linear-gradient(-45deg, #6366F1, #8B5CF6, #06B6D4, #3B82F6);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  padding: 120px 0 80px;
+  text-align: center;
+  position: relative;
+}
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
+  padding: var(--space-2) var(--space-4); border-radius: 9999px;
+  font-size: 0.85rem; font-weight: 500; margin-bottom: var(--space-6);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.hero h1 { margin-bottom: var(--space-4); color: #fff; text-shadow: 0 2px 20px rgba(0,0,0,0.2); }
+.hero p { font-size: 1.2rem; font-weight: 300; color: rgba(255,255,255,0.9); max-width: 640px; margin: 0 auto; }
 
-/* Tab Navigation */
-.tab-nav-wrapper{position:sticky;top:0;z-index:100;background:rgba(10,14,23,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 20px}
-.tab-nav{display:flex;max-width:1200px;margin:0 auto;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;gap:4px;padding:8px 0}
-.tab-nav::-webkit-scrollbar{display:none}
-.tab-btn{display:flex;align-items:center;gap:8px;padding:10px 18px;border:none;background:transparent;color:var(--text-secondary);font-family:'Inter',sans-serif;font-size:13px;font-weight:500;cursor:pointer;border-radius:var(--radius-sm);white-space:nowrap;transition:all .2s}
-.tab-btn:hover{background:rgba(59,130,246,0.08);color:var(--text-primary)}
-.tab-btn.active{background:rgba(59,130,246,0.12);color:var(--accent-blue);font-weight:600}
-.tab-btn svg{width:16px;height:16px;flex-shrink:0}
-.tab-btn .live-dot{width:6px;height:6px;border-radius:50%;background:var(--accent-green);animation:pulse-dot 2s infinite;margin-left:4px}
+.stats-bar {
+  display: flex; justify-content: center; gap: var(--space-8); flex-wrap: wrap;
+  margin-top: var(--space-12); padding-top: var(--space-8);
+  border-top: 1px solid rgba(255,255,255,0.2);
+}
+.stat-item { text-align: center; }
+.stat-value { font-size: 1.1rem; font-weight: 600; color: #fff; }
+.stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.7); margin-top: var(--space-1); }
 
-/* Main Content */
-.main{max-width:1200px;margin:0 auto;padding:32px 20px 60px}
-.demo-panel{display:none;animation:fadeIn .4s ease}
-.demo-panel.active{display:block}
+/* Tabs */
+.tabs-wrapper {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--background); border-bottom: 1px solid var(--border);
+  padding: var(--space-3) 0;
+}
+.tabs {
+  display: flex; gap: var(--space-2); overflow-x: auto;
+  scrollbar-width: none; -ms-overflow-style: none;
+  justify-content: center; flex-wrap: wrap;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab-pill {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: var(--space-2) var(--space-4); border-radius: 9999px;
+  font-size: 0.875rem; font-weight: 500; cursor: pointer;
+  border: none; background: transparent; color: var(--text-muted);
+  transition: all var(--duration-normal) var(--ease-default);
+  white-space: nowrap;
+}
+.tab-pill:hover { background: var(--surface-2); color: var(--text); }
+.tab-pill.active { background: var(--primary); color: #fff; }
+.tab-pill svg { width: 16px; height: 16px; }
 
-/* Section Headers */
-.section-header{margin-bottom:28px}
-.section-header h2{font-size:24px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:10px}
-.section-header p{color:var(--text-secondary);font-size:14px}
+/* Panels */
+.panel { display: none; padding: 80px 0; }
+.panel.active { display: block; }
 
 /* Cards */
-.card{background:var(--gradient-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:all .3s}
-.card:hover{border-color:var(--border-light);box-shadow:var(--shadow-card)}
-.card-title{font-size:13px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: var(--space-6);
+  transition: transform var(--duration-normal) var(--ease-default), box-shadow var(--duration-normal) var(--ease-default);
+}
+.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
 
-/* Grid Layouts */
-.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:20px;margin-bottom:20px}
-.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-bottom:20px}
-.grid-6{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin-bottom:20px}
+/* Section Headers */
+.section-header { margin-bottom: var(--space-8); }
+.section-header h2 { margin-bottom: var(--space-2); }
+.section-header p { color: var(--text-muted); }
+.live-dot {
+  display: inline-block; width: 8px; height: 8px; background: var(--success);
+  border-radius: 50%; margin-right: var(--space-2); vertical-align: middle;
+  animation: pulse 2s ease infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
 
-/* Heat Score Bars */
-.ticker-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(42,53,80,0.5)}
-.ticker-row:last-child{border-bottom:none}
-.ticker-symbol{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px;min-width:55px;color:var(--text-primary)}
-.ticker-bar-wrap{flex:1;height:8px;background:rgba(42,53,80,0.6);border-radius:4px;overflow:hidden}
-.ticker-bar{height:100%;border-radius:4px;transition:width 1.5s ease}
-.ticker-score{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;min-width:40px;text-align:right}
+/* Grid helpers */
+.grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-4); }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
+.grid-7 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); }
 
-/* Sentiment Sectors */
-.sector-card{padding:16px;border-radius:var(--radius-sm);border:1px solid var(--border)}
-.sector-card.bullish{background:rgba(16,185,129,0.06);border-color:rgba(16,185,129,0.2)}
-.sector-card.mixed{background:rgba(245,158,11,0.06);border-color:rgba(245,158,11,0.2)}
-.sector-card.bearish{background:rgba(239,68,68,0.06);border-color:rgba(239,68,68,0.2)}
-.sector-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
-.sector-label.bullish{color:var(--accent-green)}
-.sector-label.mixed{color:var(--accent-amber)}
-.sector-label.bearish{color:var(--accent-red)}
-.sector-item{font-size:13px;color:var(--text-secondary);padding:3px 0}
+/* Heat bar */
+.heat-bar-track { height: 6px; background: var(--surface-2); border-radius: 3px; margin-top: var(--space-2); overflow: hidden; }
+.heat-bar-fill { height: 100%; border-radius: 3px; width: 0; transition: width 1.2s var(--ease-out); }
 
-/* Badge */
-.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
-.badge-green{background:rgba(16,185,129,0.12);color:var(--accent-green);border:1px solid rgba(16,185,129,0.25)}
-.badge-red{background:rgba(239,68,68,0.12);color:var(--accent-red);border:1px solid rgba(239,68,68,0.25)}
-.badge-amber{background:rgba(245,158,11,0.12);color:var(--accent-amber);border:1px solid rgba(245,158,11,0.25)}
-.badge-blue{background:rgba(59,130,246,0.12);color:var(--accent-blue);border:1px solid rgba(59,130,246,0.25)}
-.badge-purple{background:rgba(139,92,246,0.12);color:var(--accent-purple);border:1px solid rgba(139,92,246,0.25)}
+/* Badges */
+.badge {
+  display: inline-flex; align-items: center; padding: var(--space-1) var(--space-3);
+  border-radius: 9999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.badge-bullish { background: rgba(34,197,94,0.15); color: var(--success); }
+.badge-bearish { background: rgba(239,68,68,0.15); color: var(--error); }
+.badge-mixed { background: rgba(245,158,11,0.15); color: var(--warning); }
+.badge-watch { background: rgba(6,182,212,0.15); color: var(--info); }
+.badge-neutral { background: rgba(148,163,184,0.15); color: var(--text-muted); }
 
-/* Alert Feed */
-.alert-item{display:flex;gap:16px;padding:20px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-card);margin-bottom:12px;transition:all .3s}
-.alert-item:hover{border-color:var(--border-light);transform:translateX(4px)}
-.alert-time{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-muted);min-width:70px;padding-top:2px}
-.alert-body{flex:1}
-.alert-body h4{font-size:14px;font-weight:600;margin-bottom:4px}
-.alert-body p{font-size:13px;color:var(--text-secondary)}
-.alert-meta{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+/* Ticker chip */
+.ticker-chip {
+  display: inline-block; padding: var(--space-1) var(--space-2);
+  background: var(--surface-2); border-radius: var(--radius-sm);
+  font-size: 0.75rem; font-weight: 600; margin: 2px;
+}
 
-/* Macro Indicators */
-.indicator-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;text-align:center}
-.indicator-card .value{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;margin:8px 0 4px}
-.indicator-card .name{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.8px}
-.indicator-card .trend{font-size:14px;font-weight:600;margin-top:4px}
-.trend-up{color:var(--accent-green)}
-.trend-down{color:var(--accent-red)}
-.trend-flat{color:var(--text-muted)}
+/* Score bar */
+.score-bar-track { height: 8px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
+.score-bar-fill { height: 100%; border-radius: 4px; background: var(--primary); width: 0; transition: width 1s var(--ease-out); }
 
-/* Probability Bar */
-.prob-bar{margin-bottom:16px}
-.prob-bar .prob-header{display:flex;justify-content:space-between;margin-bottom:6px;font-size:13px}
-.prob-bar .prob-header span:first-child{font-weight:500}
-.prob-bar .prob-header span:last-child{font-family:'JetBrains Mono',monospace;font-weight:600}
-.prob-bar .bar{height:10px;background:rgba(42,53,80,0.6);border-radius:5px;overflow:hidden}
-.prob-bar .fill{height:100%;border-radius:5px;transition:width 1.5s ease}
+/* Gradient border card */
+.gradient-border {
+  position: relative; padding: 2px; border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--primary), var(--accent), var(--secondary));
+}
+.gradient-border-inner {
+  background: var(--surface); border-radius: calc(var(--radius-lg) - 2px);
+  padding: var(--space-6);
+}
 
-/* Fund Row */
-.fund-row{padding:16px;border-bottom:1px solid rgba(42,53,80,0.5);display:flex;align-items:flex-start;gap:16px}
-.fund-row:last-child{border-bottom:none}
-.fund-rank{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--text-muted);min-width:30px}
-.fund-info h4{font-size:15px;font-weight:600;margin-bottom:4px}
-.fund-info p{font-size:13px;color:var(--text-secondary)}
+/* Horizontal scroll */
+.h-scroll {
+  display: flex; gap: var(--space-4); overflow-x: auto; padding-bottom: var(--space-2);
+  scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+}
+.h-scroll > * { flex-shrink: 0; }
 
-/* Earnings Table */
-.earnings-row{display:grid;grid-template-columns:80px 1fr 100px 90px;gap:12px;padding:12px 0;border-bottom:1px solid rgba(42,53,80,0.5);align-items:center;font-size:13px}
-.earnings-row:last-child{border-bottom:none}
-.earnings-row.header{font-weight:600;color:var(--text-muted);text-transform:uppercase;font-size:11px;letter-spacing:0.8px}
+/* Timeline */
+.timeline-item { display: flex; gap: var(--space-4); margin-bottom: var(--space-6); }
+.timeline-time { flex-shrink: 0; width: 80px; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); padding-top: var(--space-1); }
+.timeline-content { flex: 1; }
 
-/* Conviction Score */
-.conviction{display:flex;align-items:center;gap:4px}
-.conviction-dot{width:8px;height:8px;border-radius:50%}
+/* Regime badge */
+.regime-badge {
+  display: inline-flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-4) var(--space-8); border-radius: var(--radius-xl);
+  font-size: 1.5rem; font-weight: 700; letter-spacing: 0.05em;
+  background: var(--surface); position: relative;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+.regime-badge::before {
+  content: ''; position: absolute; inset: -2px; border-radius: calc(var(--radius-xl) + 2px);
+  background: linear-gradient(135deg, var(--warning), var(--primary), var(--accent));
+  z-index: -1; animation: regimeBorder 4s linear infinite;
+  background-size: 300% 300%;
+}
+@keyframes regimeBorder {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-/* LIVE indicator */
-.live-indicator{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--accent-green);text-transform:uppercase;letter-spacing:1px}
-.live-indicator .dot{width:8px;height:8px;border-radius:50%;background:var(--accent-green);animation:pulse-dot 2s infinite}
+/* Indicator card */
+.indicator-card { text-align: center; }
+.indicator-card .value { font-size: 1.5rem; font-weight: 700; }
+.indicator-card .label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: var(--space-1); }
+.indicator-card .change { font-size: 0.8rem; margin-top: var(--space-1); }
 
-/* Regime Badge */
-.regime-badge{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(245,158,11,0.1),rgba(245,158,11,0.05));border:1px solid rgba(245,158,11,0.3);border-radius:var(--radius);padding:16px 24px;font-size:18px;font-weight:700;color:var(--accent-amber);letter-spacing:1px;text-transform:uppercase;margin-bottom:24px}
+/* Probability bar */
+.prob-bar { display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-3); }
+.prob-label { width: 140px; font-weight: 500; font-size: 0.9rem; }
+.prob-track { flex: 1; height: 10px; background: var(--surface-2); border-radius: 5px; overflow: hidden; }
+.prob-fill { height: 100%; border-radius: 5px; width: 0; transition: width 1.2s var(--ease-out); }
+.prob-value { width: 40px; text-align: right; font-weight: 600; font-size: 0.9rem; }
 
-/* Consensus */
-.consensus-wrap{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-.consensus-chip{padding:6px 14px;border-radius:20px;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600}
-.chip-buy{background:rgba(16,185,129,0.1);color:var(--accent-green);border:1px solid rgba(16,185,129,0.25)}
-.chip-sell{background:rgba(239,68,68,0.1);color:var(--accent-red);border:1px solid rgba(239,68,68,0.25)}
-
-/* Animations */
-@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:0.4}}
-@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-
-.fade-in{opacity:0;transform:translateY(16px);transition:all .6s ease}
-.fade-in.visible{opacity:1;transform:translateY(0)}
-
-/* Divider */
-.divider{display:flex;align-items:center;gap:12px;margin:24px 0;color:var(--text-muted);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px}
-.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
-
-/* Watch List */
-.watch-item{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(42,53,80,0.4);font-size:13px}
-.watch-item:last-child{border-bottom:none}
-.watch-item .reason{color:var(--text-secondary);font-size:12px}
-
-/* Overweight/Underweight */
-.rotation-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(42,53,80,0.4)}
-.rotation-row:last-child{border-bottom:none}
-.rotation-row .sector-name{font-weight:500;font-size:14px}
-.rotation-row .rationale{font-size:12px;color:var(--text-secondary);max-width:300px}
+/* CTA */
+.cta-section { background: var(--primary); padding: 80px 0; text-align: center; }
+.cta-section h2 { color: #fff; margin-bottom: var(--space-4); font-size: 2.5rem; }
+.cta-section p { color: rgba(255,255,255,0.85); font-weight: 300; font-size: 1.1rem; margin-bottom: var(--space-8); }
+.cta-btn {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: var(--space-4) var(--space-8); background: #fff; color: var(--primary);
+  border-radius: 9999px; font-weight: 600; font-size: 1rem; text-decoration: none;
+  transition: transform var(--duration-normal) var(--ease-bounce), box-shadow var(--duration-normal);
+  border: none; cursor: pointer;
+}
+.cta-btn:hover { transform: scale(1.05); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
 
 /* Footer */
-.footer{text-align:center;padding:40px 20px;border-top:1px solid var(--border);color:var(--text-muted);font-size:13px}
-.footer .brand{font-weight:700;color:var(--text-secondary);font-size:15px;margin-bottom:4px}
+footer {
+  background: linear-gradient(180deg, var(--surface), var(--background));
+  padding: var(--space-12) 0; text-align: center;
+}
+footer .brand { font-weight: 600; font-size: 0.95rem; margin-bottom: var(--space-2); }
+footer .disclaimer { font-size: 0.75rem; color: var(--text-muted); }
 
-/* Scrollbar */
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+/* Sector card colors */
+.sector-bullish { border-left: 3px solid var(--success); }
+.sector-mixed { border-left: 3px solid var(--warning); }
+.sector-bearish { border-left: 3px solid var(--error); }
+
+/* Overweight / Underweight lists */
+.weight-list { border: 1px solid; border-radius: var(--radius-lg); padding: var(--space-6); }
+.weight-list.overweight { border-color: var(--success); }
+.weight-list.underweight { border-color: var(--error); }
+.weight-list h3 { margin-bottom: var(--space-4); }
+.weight-item { padding: var(--space-2) 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+.weight-item:last-child { border-bottom: none; }
+
+/* Consensus list */
+.consensus-list h3 { margin-bottom: var(--space-4); display: flex; align-items: center; gap: var(--space-2); }
+.consensus-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--space-3) var(--space-4); background: var(--surface-2);
+  border-radius: var(--radius-md); margin-bottom: var(--space-2);
+  font-weight: 600;
+}
+
+/* Recap card */
+.recap-card { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-6); margin-top: var(--space-8); }
+
+/* Fund card */
+.fund-card { width: 260px; }
+.fund-card .fund-name { font-weight: 600; font-size: 0.9rem; margin-bottom: var(--space-2); }
+.fund-card .fund-action { font-size: 0.85rem; color: var(--text-muted); margin-bottom: var(--space-2); }
+.fund-card .fund-amount { font-weight: 700; color: var(--accent); }
+
+/* Idea card */
+.idea-card h4 { margin-bottom: var(--space-2); }
+.idea-card p { font-size: 0.85rem; color: var(--text-muted); }
 
 /* Responsive */
-@media(max-width:768px){
-  .grid-2{grid-template-columns:1fr}
-  .grid-3{grid-template-columns:1fr}
-  .grid-6{grid-template-columns:repeat(3,1fr)}
-  .earnings-row{grid-template-columns:60px 1fr 80px 70px;font-size:12px}
-  .hero-stats{gap:24px}
-  .alert-item{flex-direction:column;gap:8px}
-  .regime-badge{font-size:14px;padding:12px 16px}
+@media (max-width: 900px) {
+  h1 { font-size: 2.25rem; }
+  .grid-5, .grid-4, .grid-7 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .stats-bar { gap: var(--space-4); }
+  .tabs { justify-content: flex-start; }
 }
-@media(max-width:480px){
-  .grid-6{grid-template-columns:repeat(2,1fr)}
-  .tab-btn{padding:8px 12px;font-size:12px}
-  .tab-btn span.tab-label{display:none}
+@media (max-width: 600px) {
+  .grid-5, .grid-4, .grid-7 { grid-template-columns: 1fr; }
+  .hero { padding: 80px 0 60px; }
+  h1 { font-size: 1.75rem; }
+  .regime-badge { font-size: 1rem; padding: var(--space-3) var(--space-6); }
 }
 </style>
 </head>
@@ -201,663 +305,381 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-primary);color
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge"><span class="dot"></span> Automated Intelligence Platform</div>
-  <h1>OpenClaw Trading Intelligence Suite</h1>
-  <p>Five automated research agents running 24/7, delivering institutional grade market intelligence to your terminal before the opening bell.</p>
-  <p class="hero-sub">All reports generated autonomously. No manual input required.</p>
-  <div class="hero-stats">
-    <div class="hero-stat"><div class="num counter" data-target="5">0</div><div class="label">Active Agents</div></div>
-    <div class="hero-stat"><div class="num counter" data-target="147">0</div><div class="label">Daily Signals</div></div>
-    <div class="hero-stat"><div class="num counter" data-target="23">0</div><div class="label">Data Sources</div></div>
-    <div class="hero-stat"><div class="num"><span class="counter" data-target="4">0</span>:<span class="counter" data-target="30">00</span></div><div class="label">AM First Report</div></div>
+  <div class="container">
+    <div class="hero-badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      Powered by OpenClaw
+    </div>
+    <h1>Trading Intelligence Suite</h1>
+    <p>Five AI powered automations that turn noise into signal. Every morning. Every filing. Every shift in sentiment.</p>
+    <div class="stats-bar">
+      <div class="stat-item"><div class="stat-value" data-count="5">0</div><div class="stat-label">Automations</div></div>
+      <div class="stat-item"><div class="stat-value">Real Time Data</div><div class="stat-label">Market Coverage</div></div>
+      <div class="stat-item"><div class="stat-value">24/7</div><div class="stat-label">Monitoring</div></div>
+      <div class="stat-item"><div class="stat-value">Zero Code</div><div class="stat-label">Required</div></div>
+    </div>
   </div>
 </section>
 
-<!-- TAB NAV -->
-<nav class="tab-nav-wrapper">
-  <div class="tab-nav">
-    <button class="tab-btn active" data-tab="sentiment" onclick="switchTab('sentiment')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-      <span class="tab-label">Sentiment Scanner</span><span class="live-dot"></span>
-    </button>
-    <button class="tab-btn" data-tab="earnings" onclick="switchTab('earnings')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-      <span class="tab-label">Earnings Whisper</span>
-    </button>
-    <button class="tab-btn" data-tab="news" onclick="switchTab('news')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
-      <span class="tab-label">News Arbitrage</span><span class="live-dot"></span>
-    </button>
-    <button class="tab-btn" data-tab="macro" onclick="switchTab('macro')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-      <span class="tab-label">Macro Regime</span>
-    </button>
-    <button class="tab-btn" data-tab="funds" onclick="switchTab('funds')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-      <span class="tab-label">Smart Money</span>
-    </button>
+<!-- TABS -->
+<nav class="tabs-wrapper">
+  <div class="container">
+    <div class="tabs">
+      <button class="tab-pill active" data-tab="sentiment">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        Sentiment Scanner
+      </button>
+      <button class="tab-pill" data-tab="earnings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Earnings Whisper
+      </button>
+      <button class="tab-pill" data-tab="news">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a2 2 0 01-2 2zm0 0a2 2 0 01-2-2v-9c0-1.1.9-2 2-2h2"/></svg>
+        News Arbitrage
+      </button>
+      <button class="tab-pill" data-tab="macro">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        Macro Regime
+      </button>
+      <button class="tab-pill" data-tab="copycat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        Copycat Funds
+      </button>
+    </div>
   </div>
 </nav>
 
-<!-- MAIN -->
-<div class="main">
-
-<!-- ===== DEMO 1: SENTIMENT SCANNER ===== -->
-<div class="demo-panel active" id="panel-sentiment">
-  <div class="section-header">
-    <h2>
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-      Morning Sentiment Scanner
-      <span class="live-indicator"><span class="dot"></span>LIVE</span>
-    </h2>
-    <p>Daily pre-market report at 6:00 AM ET. Scanning Twitter/X, Reddit, and StockTwits for unusual buzz and sentiment shifts.</p>
-  </div>
-
-  <!-- Market Overview -->
-  <div class="card" style="margin-bottom:20px">
-    <div class="card-title">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-      Market Overview — February 17, 2026
-    </div>
-    <div class="grid-3">
-      <div style="font-size:13px;color:var(--text-secondary)">
-        <strong style="color:var(--text-primary)">Overall Tone:</strong> Cautiously bullish. Retail traders showing elevated activity in space/defense tickers following weekend Pentagon budget leak. Crypto sentiment cooling after Bitcoin failed $70K breakout.
-      </div>
-      <div style="font-size:13px;color:var(--text-secondary)">
-        <strong style="color:var(--text-primary)">Volume Signal:</strong> Social mention volume is 2.3x normal for a Monday. Unusual weekend Reddit activity in r/wallstreetbets centered on RKLB and PLTR government contracts.
-      </div>
-      <div style="font-size:13px;color:var(--text-secondary)">
-        <strong style="color:var(--text-primary)">Key Catalyst:</strong> FOMC minutes release Wednesday. Options market pricing 68% chance of dovish language. Earnings season entering final stretch with big tech largely behind us.
-      </div>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <!-- Top Tickers -->
-    <div class="card">
-      <div class="card-title">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
-        Top 5 Tickers by Heat Score
-      </div>
-      <div class="ticker-row">
-        <span class="ticker-symbol">PLTR</span>
-        <div class="ticker-bar-wrap"><div class="ticker-bar" style="width:90%;background:linear-gradient(90deg,var(--accent-red),var(--accent-amber))"></div></div>
-        <span class="ticker-score" style="color:var(--accent-red)">9/10</span>
-      </div>
-      <div class="ticker-row">
-        <span class="ticker-symbol">RKLB</span>
-        <div class="ticker-bar-wrap"><div class="ticker-bar" style="width:80%;background:linear-gradient(90deg,var(--accent-amber),var(--accent-amber))"></div></div>
-        <span class="ticker-score" style="color:var(--accent-amber)">8/10</span>
-      </div>
-      <div class="ticker-row">
-        <span class="ticker-symbol">GME</span>
-        <div class="ticker-bar-wrap"><div class="ticker-bar" style="width:70%;background:linear-gradient(90deg,var(--accent-amber),var(--accent-green))"></div></div>
-        <span class="ticker-score" style="color:var(--accent-amber)">7/10</span>
-      </div>
-      <div class="ticker-row">
-        <span class="ticker-symbol">AVGO</span>
-        <div class="ticker-bar-wrap"><div class="ticker-bar" style="width:70%;background:linear-gradient(90deg,var(--accent-amber),var(--accent-green))"></div></div>
-        <span class="ticker-score" style="color:var(--accent-amber)">7/10</span>
-      </div>
-      <div class="ticker-row">
-        <span class="ticker-symbol">TSLA</span>
-        <div class="ticker-bar-wrap"><div class="ticker-bar" style="width:60%;background:linear-gradient(90deg,var(--accent-green),var(--accent-cyan))"></div></div>
-        <span class="ticker-score" style="color:var(--accent-green)">6/10</span>
-      </div>
+<!-- PANEL 1: SENTIMENT -->
+<section class="panel active" id="panel-sentiment">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2><span class="live-dot"></span> Morning Sentiment Scanner</h2>
+      <p>AI aggregated sentiment across social, options flow, and news for today's top movers.</p>
     </div>
 
-    <!-- Divergence Alerts -->
-    <div class="card">
-      <div class="card-title">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        Sentiment vs Price Divergence
-      </div>
-      <div style="margin-bottom:16px">
-        <div class="watch-item">
-          <div><strong>GME</strong> <span class="badge badge-amber">Divergence</span></div>
-          <div class="reason">Social sentiment surging +340% but price flat. Potential breakout or trap.</div>
-        </div>
-        <div class="watch-item">
-          <div><strong>AVGO</strong> <span class="badge badge-green">Confirmed</span></div>
-          <div class="reason">Rising sentiment aligns with rising price. Momentum intact.</div>
-        </div>
-        <div class="watch-item">
-          <div><strong>TSLA</strong> <span class="badge badge-red">Negative Div</span></div>
-          <div class="reason">Declining sentiment despite price stability. Early warning signal.</div>
-        </div>
-      </div>
-      <div class="card-title" style="margin-top:20px">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-        Watch List
-      </div>
-      <div class="watch-item"><div><strong>SMCI</strong></div><div class="reason">Audit concerns resurfacing on Twitter</div></div>
-      <div class="watch-item"><div><strong>ARM</strong></div><div class="reason">Lock up expiry approaching, insider chatter</div></div>
-      <div class="watch-item"><div><strong>COIN</strong></div><div class="reason">Crypto sentiment shift could drag</div></div>
-    </div>
-  </div>
-
-  <!-- Sector Sentiment -->
-  <div class="divider">Sector Sentiment Breakdown</div>
-  <div class="grid-3">
-    <div class="sector-card bullish">
-      <div class="sector-label bullish">Bullish</div>
-      <div class="sector-item">Space &amp; Defense</div>
-      <div class="sector-item">Consumer Staples</div>
-    </div>
-    <div class="sector-card mixed">
-      <div class="sector-label mixed">Mixed</div>
-      <div class="sector-item">AI Infrastructure</div>
-      <div class="sector-item">Financials</div>
-    </div>
-    <div class="sector-card bearish">
-      <div class="sector-label bearish">Bearish</div>
-      <div class="sector-item">Software / SaaS</div>
-      <div class="sector-item">IT Services</div>
-      <div class="sector-item">Real Estate</div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== DEMO 2: EARNINGS WHISPER ===== -->
-<div class="demo-panel" id="panel-earnings">
-  <div class="section-header">
-    <h2>
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-purple)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-      Earnings Whisper Tracker
-    </h2>
-    <p>Pre-earnings intelligence combining whisper numbers, insider activity, and options flow to identify high conviction plays before announcements.</p>
-  </div>
-
-  <!-- Calendar -->
-  <div class="card" style="margin-bottom:20px">
-    <div class="card-title">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-      Earnings Calendar: This Week
-    </div>
-    <div class="earnings-row header">
-      <span>Date</span><span>Company</span><span>Consensus</span><span>Whisper</span>
-    </div>
-    <div class="earnings-row">
-      <span class="mono" style="color:var(--text-muted)">Feb 18</span>
-      <span><strong>PANW</strong> Palo Alto Networks</span>
-      <span class="mono">$0.91</span>
-      <span class="mono" style="color:var(--accent-green)">$0.94 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="3"><path d="M12 19V5M5 12l7-7 7 7"/></svg></span>
-    </div>
-    <div class="earnings-row">
-      <span class="mono" style="color:var(--text-muted)">Feb 18</span>
-      <span><strong>CEG</strong> Constellation Energy</span>
-      <span class="mono">$2.14</span>
-      <span class="mono" style="color:var(--accent-green)">$2.28 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="3"><path d="M12 19V5M5 12l7-7 7 7"/></svg></span>
-    </div>
-    <div class="earnings-row">
-      <span class="mono" style="color:var(--text-muted)">Feb 19</span>
-      <span><strong>ETSY</strong> Etsy Inc</span>
-      <span class="mono">$1.28</span>
-      <span class="mono" style="color:var(--accent-red)">$1.21 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--accent-red)" stroke-width="3"><path d="M12 5v14M5 12l7 7 7-7"/></svg></span>
-    </div>
-    <div class="earnings-row">
-      <span class="mono" style="color:var(--text-muted)">Feb 20</span>
-      <span><strong>RIVN</strong> Rivian Automotive</span>
-      <span class="mono">($0.75)</span>
-      <span class="mono" style="color:var(--text-muted)">($0.78)</span>
-    </div>
-    <div class="earnings-row">
-      <span class="mono" style="color:var(--text-muted)">Feb 21</span>
-      <span><strong>INTU</strong> Intuit Inc</span>
-      <span class="mono">$2.36</span>
-      <span class="mono" style="color:var(--accent-green)">$2.44 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="3"><path d="M12 19V5M5 12l7-7 7 7"/></svg></span>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <!-- Insider Activity -->
-    <div class="card">
-      <div class="card-title">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg>
-        Insider Activity (Form 4 Filings)
-      </div>
-      <div class="watch-item">
-        <div><strong>LUNR</strong> <span class="badge badge-red">Sell</span></div>
-        <div class="reason">CFO sold $2.2M in shares on Feb 14. Represents 18% of holdings. Ahead of earnings on Feb 25.</div>
-      </div>
-      <div class="watch-item">
-        <div><strong>PANW</strong> <span class="badge badge-green">Buy</span></div>
-        <div class="reason">VP of Engineering purchased $340K. Consistent insider buying pattern over 3 months.</div>
-      </div>
-      <div class="watch-item">
-        <div><strong>RIVN</strong> <span class="badge badge-red">Sell</span></div>
-        <div class="reason">Multiple C-suite sales totaling $4.1M in the past 10 days. Clustered selling pattern.</div>
-      </div>
-      <div class="watch-item">
-        <div><strong>CEG</strong> <span class="badge badge-green">Buy</span></div>
-        <div class="reason">Director added $890K position. Third insider purchase this quarter.</div>
-      </div>
-    </div>
-
-    <!-- Options Flow -->
-    <div class="card">
-      <div class="card-title">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-        Options Flow Anomalies
-      </div>
-      <div class="watch-item">
-        <div><strong>DVN</strong> <span class="badge badge-red">Bearish</span></div>
-        <div class="reason">$3.8M in put sweeps at $42 strike, expiring Feb 21. Unusual volume 4.2x average.</div>
-      </div>
-      <div class="watch-item">
-        <div><strong>PANW</strong> <span class="badge badge-green">Bullish</span></div>
-        <div class="reason">$5.1M call spread, $200/$220 strikes for March expiry. Smart money positioning for beat.</div>
-      </div>
-      <div class="watch-item">
-        <div><strong>ETSY</strong> <span class="badge badge-red">Bearish</span></div>
-        <div class="reason">Put/call ratio at 2.8x. Heavy put accumulation at $65 strike. Whisper below consensus.</div>
-      </div>
-      <div class="watch-item">
-        <div><strong>CEG</strong> <span class="badge badge-green">Bullish</span></div>
-        <div class="reason">Large block call purchase $2.1M at $280 strike. Feb 28 expiry. Likely pre-earnings positioning.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- High Conviction -->
-  <div class="divider">High Conviction Plays</div>
-  <div class="grid-3">
-    <div class="card" style="border-color:rgba(16,185,129,0.3)">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-        <span class="mono" style="font-size:18px;font-weight:700">PANW</span>
-        <span class="badge badge-green">HIGH CONVICTION</span>
-      </div>
-      <div class="conviction" style="margin-bottom:8px">
-        <span class="conviction-dot" style="background:var(--accent-green)"></span>
-        <span class="conviction-dot" style="background:var(--accent-green)"></span>
-        <span class="conviction-dot" style="background:var(--accent-green)"></span>
-        <span class="conviction-dot" style="background:var(--accent-green)"></span>
-        <span class="conviction-dot" style="background:rgba(42,53,80,0.6)"></span>
-        <span style="font-size:12px;color:var(--text-secondary);margin-left:4px">4/5</span>
-      </div>
-      <p style="font-size:12px;color:var(--text-secondary)">Whisper beat, bullish options flow, insider buying, strong sector tailwinds. All signals aligned for upside surprise.</p>
-    </div>
-    <div class="card" style="border-color:rgba(16,185,129,0.3)">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-        <span class="mono" style="font-size:18px;font-weight:700">CEG</span>
-        <span class="badge badge-green">HIGH CONVICTION</span>
-      </div>
-      <div class="conviction" style="margin-bottom:8px">
-        <span class="conviction-dot" style="background:var(--accent-green)"></span>
-        <span class="conviction-dot" style="background:var(--accent-green)"></span>
-        <span class="conviction-dot" style="background:var(--accent-green)"></span>
-        <span class="conviction-dot" style="background:var(--accent-green)"></span>
-        <span class="conviction-dot" style="background:rgba(42,53,80,0.6)"></span>
-        <span style="font-size:12px;color:var(--text-secondary);margin-left:4px">4/5</span>
-      </div>
-      <p style="font-size:12px;color:var(--text-secondary)">Nuclear energy tailwind, whisper significantly above consensus, insider accumulation, bullish options activity.</p>
-    </div>
-    <div class="card" style="border-color:rgba(239,68,68,0.3)">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-        <span class="mono" style="font-size:18px;font-weight:700">ETSY</span>
-        <span class="badge badge-red">SHORT CONVICTION</span>
-      </div>
-      <div class="conviction" style="margin-bottom:8px">
-        <span class="conviction-dot" style="background:var(--accent-red)"></span>
-        <span class="conviction-dot" style="background:var(--accent-red)"></span>
-        <span class="conviction-dot" style="background:var(--accent-red)"></span>
-        <span class="conviction-dot" style="background:rgba(42,53,80,0.6)"></span>
-        <span class="conviction-dot" style="background:rgba(42,53,80,0.6)"></span>
-        <span style="font-size:12px;color:var(--text-secondary);margin-left:4px">3/5</span>
-      </div>
-      <p style="font-size:12px;color:var(--text-secondary)">Whisper below consensus, elevated put activity, SaaS sector headwinds. Risk/reward favors downside positioning.</p>
-    </div>
-  </div>
-</div>
-
-<!-- ===== DEMO 3: NEWS ARBITRAGE ===== -->
-<div class="demo-panel" id="panel-news">
-  <div class="section-header">
-    <h2>
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
-      News Arbitrage Alerts
-      <span class="live-indicator"><span class="dot"></span>LIVE</span>
-    </h2>
-    <p>Real-time SEC filing and regulatory alert system. Monitors 8K, 13F, S-1, and merger proxy filings with automated impact analysis.</p>
-  </div>
-
-  <div class="alert-item" style="border-left:3px solid var(--accent-green)">
-    <div class="alert-time">09:14 AM</div>
-    <div class="alert-body">
-      <h4>CFLT / IBM — Merger Shareholder Approval Filed</h4>
-      <p>Confluent shareholders approved the IBM acquisition at $36.50 per share. DEFM14A proxy filing confirms 92% approval rate. Expected close date: March 28, 2026. Current spread: 1.2% ($0.44 below deal price).</p>
-      <div class="alert-meta">
-        <span class="badge badge-green">Bullish</span>
-        <span class="badge badge-blue">Merger Arb</span>
-        <span class="badge badge-purple">1.2% Spread</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="alert-item" style="border-left:3px solid var(--accent-amber)">
-    <div class="alert-time">08:47 AM</div>
-    <div class="alert-body">
-      <h4>SPT — Earnings Beat + CFO Resignation</h4>
-      <p>Sprout Social reported Q4 EPS of $0.42 (est. $0.35) with revenue of $112M (+18% YoY). However, CFO Joe Del Preto announced resignation effective March 15. Mixed signal: strong numbers offset by leadership uncertainty.</p>
-      <div class="alert-meta">
-        <span class="badge badge-amber">Mixed</span>
-        <span class="badge badge-blue">8-K Filing</span>
-        <span class="badge badge-purple">Action: 24h</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="alert-item" style="border-left:3px solid var(--accent-cyan)">
-    <div class="alert-time">08:12 AM</div>
-    <div class="alert-body">
-      <h4>AMAT — Material Event 8-K Filing</h4>
-      <p>Applied Materials filed an 8-K citing a "material definitive agreement" under Item 1.01. Details pending full filing review. Historically, AMAT 8-K filings of this type have preceded partnership or acquisition announcements. Monitoring for follow-up disclosures.</p>
-      <div class="alert-meta">
-        <span class="badge badge-blue">Watch</span>
-        <span class="badge badge-blue">8-K Item 1.01</span>
-        <span class="badge badge-purple">Developing</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="alert-item" style="border-left:3px solid var(--accent-red)">
-    <div class="alert-time">07:30 AM</div>
-    <div class="alert-body">
-      <h4>NOW — Clustered Insider Selling Pattern Detected</h4>
-      <p>ServiceNow saw four Form 4 filings over the past 5 trading days. CEO, CTO, and two VPs sold a combined $28M in shares. This represents the largest insider selling cluster in 18 months. No 10b5-1 plan amendments filed, suggesting discretionary sales.</p>
-      <div class="alert-meta">
-        <span class="badge badge-red">Bearish</span>
-        <span class="badge badge-blue">Form 4 Cluster</span>
-        <span class="badge badge-purple">Action: 48h</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Daily Recap -->
-  <div class="card" style="margin-top:20px">
-    <div class="card-title">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-      Daily Recap Summary
-    </div>
-    <div class="grid-2" style="margin-bottom:0">
-      <div style="font-size:13px;color:var(--text-secondary)">
-        <strong style="color:var(--text-primary)">Filings Scanned Today:</strong> 847<br>
-        <strong style="color:var(--text-primary)">Actionable Alerts:</strong> 4 (1 bullish, 1 mixed, 1 watch, 1 bearish)<br>
-        <strong style="color:var(--text-primary)">Average Latency:</strong> 3.2 minutes from filing to alert
-      </div>
-      <div style="font-size:13px;color:var(--text-secondary)">
-        <strong style="color:var(--text-primary)">Sectors Most Active:</strong> Enterprise Software, Semiconductors<br>
-        <strong style="color:var(--text-primary)">Upcoming Catalysts:</strong> FOMC minutes (Wed), Options expiration (Fri)<br>
-        <strong style="color:var(--text-primary)">M&amp;A Pipeline:</strong> 3 active deals within 5% of close
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== DEMO 4: MACRO REGIME ===== -->
-<div class="demo-panel" id="panel-macro">
-  <div class="section-header">
-    <h2>
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-      Macro Regime Dashboard
-    </h2>
-    <p>Weekly macro analysis classifying the current market regime and providing sector rotation recommendations based on cross-asset signals.</p>
-  </div>
-
-  <div class="regime-badge">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
-    Cautious Rotation
-  </div>
-
-  <!-- Key Indicators -->
-  <div class="grid-6">
-    <div class="indicator-card">
-      <div class="name">VIX</div>
-      <div class="value">21.84</div>
-      <div class="trend trend-up">&#9650; Rising</div>
-    </div>
-    <div class="indicator-card">
-      <div class="name">DXY</div>
-      <div class="value">97.12</div>
-      <div class="trend trend-down">&#9660; Falling</div>
-    </div>
-    <div class="indicator-card">
-      <div class="name">10Y Yield</div>
-      <div class="value">4.056%</div>
-      <div class="trend trend-down">&#9660; Falling</div>
-    </div>
-    <div class="indicator-card">
-      <div class="name">Crude Oil</div>
-      <div class="value">$63.31</div>
-      <div class="trend trend-up">&#9650; Rising</div>
-    </div>
-    <div class="indicator-card">
-      <div class="name">Gold</div>
-      <div class="value">$4,945</div>
-      <div class="trend trend-down">&#9660; Falling</div>
-    </div>
-    <div class="indicator-card">
-      <div class="name">Bitcoin</div>
-      <div class="value">$68,880</div>
-      <div class="trend trend-flat">&#9654; Flat</div>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <!-- Sector Rotation -->
-    <div class="card">
-      <div class="card-title">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
-        Sector Rotation Calls
-      </div>
-      <div class="rotation-row">
-        <div>
-          <div class="sector-name">Energy</div>
-          <div class="rationale">Rising oil, falling dollar, supply constraints</div>
-        </div>
-        <span class="badge badge-green">Overweight</span>
-      </div>
-      <div class="rotation-row">
-        <div>
-          <div class="sector-name">Defense / Aerospace</div>
-          <div class="rationale">Pentagon budget expansion, bipartisan support</div>
-        </div>
-        <span class="badge badge-green">Overweight</span>
-      </div>
-      <div class="rotation-row">
-        <div>
-          <div class="sector-name">Utilities</div>
-          <div class="rationale">AI power demand narrative, falling yields</div>
-        </div>
-        <span class="badge badge-green">Overweight</span>
-      </div>
-      <div class="rotation-row">
-        <div>
-          <div class="sector-name">Growth / SaaS</div>
-          <div class="rationale">Elevated VIX, valuation compression risk</div>
-        </div>
-        <span class="badge badge-red">Underweight</span>
-      </div>
-      <div class="rotation-row">
-        <div>
-          <div class="sector-name">Real Estate</div>
-          <div class="rationale">Office vacancy headwinds, rate sensitivity</div>
-        </div>
-        <span class="badge badge-red">Underweight</span>
-      </div>
-    </div>
-
-    <!-- Probability Scenarios -->
-    <div class="card">
-      <div class="card-title">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-        Probability Scenarios
-      </div>
-      <div class="prob-bar">
-        <div class="prob-header"><span>Goldilocks Rotation</span><span style="color:var(--accent-green)">50%</span></div>
-        <div class="bar"><div class="fill" style="width:50%;background:linear-gradient(90deg,var(--accent-green),var(--accent-cyan))"></div></div>
-        <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">Soft landing confirmed. Gradual rotation from mega cap tech into value and cyclicals. Fed stays patient.</div>
-      </div>
-      <div class="prob-bar">
-        <div class="prob-header"><span>Tariff Shock</span><span style="color:var(--accent-amber)">30%</span></div>
-        <div class="bar"><div class="fill" style="width:30%;background:linear-gradient(90deg,var(--accent-amber),var(--accent-red))"></div></div>
-        <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">New tariff escalation disrupts supply chains. Risk-off move, dollar strength, VIX spike above 30.</div>
-      </div>
-      <div class="prob-bar">
-        <div class="prob-header"><span>Sticky Inflation</span><span style="color:var(--accent-red)">20%</span></div>
-        <div class="bar"><div class="fill" style="width:20%;background:linear-gradient(90deg,var(--accent-red),var(--accent-pink))"></div></div>
-        <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">CPI surprises to upside. Fed forced hawkish pivot. Yields reverse higher, broad equity selloff.</div>
-      </div>
-
-      <div style="margin-top:20px;padding:16px;background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.15);border-radius:var(--radius-sm)">
-        <div style="font-size:12px;font-weight:600;color:var(--accent-blue);margin-bottom:6px">POSITIONING RECOMMENDATION</div>
-        <div style="font-size:13px;color:var(--text-secondary)">Maintain 70% equity allocation with defensive tilt. Favor energy, defense, and utilities. Reduce SaaS and speculative growth. Hold 5% cash buffer for volatility opportunities. Consider VIX call spreads as portfolio hedge above 25.</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== DEMO 5: SMART MONEY ===== -->
-<div class="demo-panel" id="panel-funds">
-  <div class="section-header">
-    <h2>
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-      Copycat Fund Tracker
-    </h2>
-    <p>13F filing analysis tracking the largest and most successful hedge funds. Identifies consensus positions, contrarian bets, and actionable trade ideas from smart money moves.</p>
-  </div>
-
-  <!-- Top Fund Moves -->
-  <div class="card" style="margin-bottom:20px">
-    <div class="card-title">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
-      Top 5 Position Changes (Q4 2025 13F Filings)
-    </div>
-    <div class="fund-row">
-      <div class="fund-rank">01</div>
-      <div class="fund-info">
-        <h4>Bridgewater Associates</h4>
-        <p>Dumped $461M in GOOGL and META positions. Simultaneously rotated $380M into NVDA and ORCL. Signals a shift from ad-dependent tech to enterprise AI infrastructure plays. Largest single-quarter rotation in Bridgewater's public equity book.</p>
-      </div>
-    </div>
-    <div class="fund-row">
-      <div class="fund-rank">02</div>
-      <div class="fund-info">
-        <h4>Pershing Square (Bill Ackman)</h4>
-        <p>Built a new $1.5B position in META over Q4, making it the fund's second largest holding. Contrarian to Bridgewater's exit. Ackman appears to be betting on Instagram monetization acceleration and AI-driven ad targeting improvements.</p>
-      </div>
-    </div>
-    <div class="fund-row">
-      <div class="fund-rank">03</div>
-      <div class="fund-info">
-        <h4>Baupost Group (Seth Klarman)</h4>
-        <p>Initiated a $490M position in AMZN. This is notable because Klarman is a deep value investor who rarely touches mega cap tech. Suggests he sees Amazon as fundamentally undervalued, likely based on AWS growth re-acceleration thesis.</p>
-      </div>
-    </div>
-    <div class="fund-row">
-      <div class="fund-rank">04</div>
-      <div class="fund-info">
-        <h4>Renaissance Technologies</h4>
-        <p>Built a concentrated housing basket: $220M across DHI, LEN, and NVR. Quant signals appear to be picking up on housing recovery ahead of consensus. Also increased COST position by $180M.</p>
-      </div>
-    </div>
-    <div class="fund-row">
-      <div class="fund-rank">05</div>
-      <div class="fund-info">
-        <h4>Baillie Gifford</h4>
-        <p>Exited 60% of US tech holdings and rotated into Latin American equities. New positions in NU Holdings ($340M) and MercadoLibre ($290M). A major bet on emerging market fintech growth over US tech premium.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <!-- Consensus -->
-    <div class="card">
-      <div class="card-title">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-        Consensus Positions
-      </div>
-      <div style="margin-bottom:16px">
-        <div style="font-size:12px;font-weight:600;color:var(--accent-green);margin-bottom:8px">CONSENSUS BUYS (3+ funds adding)</div>
-        <div class="consensus-wrap">
-          <span class="consensus-chip chip-buy">AMZN</span>
-          <span class="consensus-chip chip-buy">NVDA</span>
-          <span class="consensus-chip chip-buy">ORCL</span>
-        </div>
-      </div>
-      <div>
-        <div style="font-size:12px;font-weight:600;color:var(--accent-red);margin-bottom:8px">CONSENSUS EXITS (2+ funds reducing)</div>
-        <div class="consensus-wrap">
-          <span class="consensus-chip chip-sell">GOOGL</span>
-          <span class="consensus-chip chip-sell">META</span>
+    <div class="gradient-border reveal" style="margin-bottom:var(--space-8)">
+      <div class="gradient-border-inner">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--space-4)">
+          <div>
+            <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:var(--space-1)">Market Overview</div>
+            <div style="font-size:1.5rem;font-weight:700">Elevated Retail Buzz, Options Skew Bullish</div>
+          </div>
+          <div style="display:flex;gap:var(--space-6)">
+            <div style="text-align:center"><div style="font-size:1.25rem;font-weight:700;color:var(--success)">72%</div><div style="font-size:0.75rem;color:var(--text-muted)">Bullish Flow</div></div>
+            <div style="text-align:center"><div style="font-size:1.25rem;font-weight:700;color:var(--warning)">18%</div><div style="font-size:0.75rem;color:var(--text-muted)">Mixed</div></div>
+            <div style="text-align:center"><div style="font-size:1.25rem;font-weight:700;color:var(--error)">10%</div><div style="font-size:0.75rem;color:var(--text-muted)">Bearish</div></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Surprise + Ideas -->
-    <div class="card">
-      <div class="card-title">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-purple)" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        Surprise Move Spotlight
-      </div>
-      <div style="padding:16px;background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.15);border-radius:var(--radius-sm);margin-bottom:16px">
-        <div style="font-size:14px;font-weight:600;margin-bottom:4px">Seth Klarman Buying AMZN</div>
-        <div style="font-size:13px;color:var(--text-secondary)">The quintessential value investor adding $490M in mega cap tech is the most surprising move of the quarter. Klarman historically avoids these names. When he breaks pattern, it tends to be prescient. His last major "pattern break" was buying GOOG in 2012 before a 3x run.</div>
-      </div>
-      <div class="card-title">Follow the Money: Actionable Ideas</div>
-      <div class="watch-item"><div><strong>AMZN</strong> <span class="badge badge-green">Strong Buy</span></div><div class="reason">Klarman + consensus backing. AWS re-acceleration catalyst.</div></div>
-      <div class="watch-item"><div><strong>NVDA</strong> <span class="badge badge-green">Buy</span></div><div class="reason">Bridgewater rotation target. AI capex cycle continuation.</div></div>
-      <div class="watch-item"><div><strong>NU</strong> <span class="badge badge-blue">Speculative Buy</span></div><div class="reason">Baillie Gifford's EM fintech thesis. High conviction bet.</div></div>
-      <div class="watch-item"><div><strong>GOOGL</strong> <span class="badge badge-amber">Caution</span></div><div class="reason">Bridgewater exiting signals potential headwinds. Monitor for trend.</div></div>
+    <div class="grid-5 reveal" style="margin-bottom:var(--space-8)">
+      <div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><span class="ticker-chip">PLTR</span><span style="font-weight:700;color:var(--error)">9/10</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-top:var(--space-2)">Red hot social volume</div><div class="heat-bar-track"><div class="heat-bar-fill" data-width="90" style="background:var(--error)"></div></div></div>
+      <div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><span class="ticker-chip">RKLB</span><span style="font-weight:700;color:var(--warning)">8/10</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-top:var(--space-2)">Breakout momentum</div><div class="heat-bar-track"><div class="heat-bar-fill" data-width="80" style="background:var(--warning)"></div></div></div>
+      <div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><span class="ticker-chip">GME</span><span style="font-weight:700;color:var(--warning)">7/10</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-top:var(--space-2)">Options gamma ramp</div><div class="heat-bar-track"><div class="heat-bar-fill" data-width="70" style="background:var(--warning)"></div></div></div>
+      <div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><span class="ticker-chip">AVGO</span><span style="font-weight:700;color:var(--warning)">7/10</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-top:var(--space-2)">Institutional accumulation</div><div class="heat-bar-track"><div class="heat-bar-fill" data-width="70" style="background:var(--warning)"></div></div></div>
+      <div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><span class="ticker-chip">TSLA</span><span style="font-weight:700;color:var(--success)">6/10</span></div><div style="font-size:0.8rem;color:var(--text-muted);margin-top:var(--space-2)">Sentiment stabilizing</div><div class="heat-bar-track"><div class="heat-bar-fill" data-width="60" style="background:var(--success)"></div></div></div>
+    </div>
+
+    <div class="grid-3 reveal" style="margin-bottom:var(--space-8)">
+      <div class="card sector-bullish"><h3 style="color:var(--success);margin-bottom:var(--space-3)">Bullish Sectors</h3><div style="font-size:0.9rem;color:var(--text-muted)">Semiconductors, Defense/Aerospace, Cloud Infrastructure, AI/ML Platforms</div></div>
+      <div class="card sector-mixed"><h3 style="color:var(--warning);margin-bottom:var(--space-3)">Mixed Sectors</h3><div style="font-size:0.9rem;color:var(--text-muted)">Biotech, Consumer Discretionary, Financials</div></div>
+      <div class="card sector-bearish"><h3 style="color:var(--error);margin-bottom:var(--space-3)">Bearish Sectors</h3><div style="font-size:0.9rem;color:var(--text-muted)">Commercial Real Estate, Traditional Retail, Regional Banks</div></div>
+    </div>
+
+    <div class="grid-3 reveal" style="margin-bottom:var(--space-8)">
+      <div class="card"><span class="badge badge-watch" style="margin-bottom:var(--space-2)">Divergence</span><h4 style="margin-top:var(--space-2)">PLTR: Price vs Sentiment</h4><p style="font-size:0.85rem;color:var(--text-muted);margin-top:var(--space-2)">Social sentiment at 9/10 but price action lagging. Potential catch up or reversal.</p></div>
+      <div class="card"><span class="badge badge-watch" style="margin-bottom:var(--space-2)">Divergence</span><h4 style="margin-top:var(--space-2)">GME: Volume Spike</h4><p style="font-size:0.85rem;color:var(--text-muted);margin-top:var(--space-2)">Options volume 3x average with concentrated call buying at $30 strike.</p></div>
+      <div class="card"><span class="badge badge-watch" style="margin-bottom:var(--space-2)">Divergence</span><h4 style="margin-top:var(--space-2)">AVGO: Dark Pool Activity</h4><p style="font-size:0.85rem;color:var(--text-muted);margin-top:var(--space-2)">Unusual dark pool prints above ask suggest institutional loading.</p></div>
+    </div>
+
+    <div class="grid-3 reveal">
+      <div class="card" style="border-left:3px solid var(--primary)"><div style="font-size:0.75rem;color:var(--text-muted)">Watch List</div><h4 style="margin-top:var(--space-1)">SMCI</h4><p style="font-size:0.85rem;color:var(--text-muted);margin-top:var(--space-1)">Filing deadline approaching, elevated put volume.</p></div>
+      <div class="card" style="border-left:3px solid var(--primary)"><div style="font-size:0.75rem;color:var(--text-muted)">Watch List</div><h4 style="margin-top:var(--space-1)">MSTR</h4><p style="font-size:0.85rem;color:var(--text-muted);margin-top:var(--space-1)">BTC correlation trade, premium to NAV expanding.</p></div>
+      <div class="card" style="border-left:3px solid var(--primary)"><div style="font-size:0.75rem;color:var(--text-muted)">Watch List</div><h4 style="margin-top:var(--space-1)">ARM</h4><p style="font-size:0.85rem;color:var(--text-muted);margin-top:var(--space-1)">Lock up expiry this week, supply pressure risk.</p></div>
     </div>
   </div>
-</div>
+</section>
 
-</div><!-- /main -->
+<!-- PANEL 2: EARNINGS -->
+<section class="panel" id="panel-earnings">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Earnings Whisper Tracker</h2>
+      <p>AI scans options flow, insider transactions, and whisper estimates to find edge before the print.</p>
+    </div>
+
+    <div class="h-scroll reveal" style="margin-bottom:var(--space-8)">
+      <div class="card" style="min-width:200px;border-top:3px solid var(--primary)"><div style="font-size:0.75rem;color:var(--accent);font-weight:600;margin-bottom:var(--space-2)">TODAY</div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:var(--space-1)"><span class="ticker-chip">PANW</span><span style="font-size:0.85rem;color:var(--text-muted)">$0.94</span></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:var(--space-1)"><span class="ticker-chip">MDT</span><span style="font-size:0.85rem;color:var(--text-muted)">$1.34</span></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:var(--space-1)"><span class="ticker-chip">CEG</span><span style="font-size:0.85rem;color:var(--text-muted)">$2.28</span></div>
+        <div style="display:flex;justify-content:space-between"><span class="ticker-chip">CDNS</span><span style="font-size:0.85rem;color:var(--text-muted)">$1.91</span></div>
+      </div>
+      <div class="card" style="min-width:200px"><div style="font-size:0.75rem;color:var(--text-muted);font-weight:600;margin-bottom:var(--space-2)">WEDNESDAY</div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:var(--space-1)"><span class="ticker-chip">NVDA</span><span style="font-size:0.85rem;color:var(--text-muted)">$0.89</span></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:var(--space-1)"><span class="ticker-chip">BKNG</span><span style="font-size:0.85rem;color:var(--text-muted)">TBD</span></div>
+        <div style="display:flex;justify-content:space-between"><span class="ticker-chip">SNPS</span><span style="font-size:0.85rem;color:var(--text-muted)">TBD</span></div>
+      </div>
+      <div class="card" style="min-width:200px"><div style="font-size:0.75rem;color:var(--text-muted);font-weight:600;margin-bottom:var(--space-2)">THURSDAY</div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:var(--space-1)"><span class="ticker-chip">WMT</span><span style="font-size:0.85rem;color:var(--text-muted)">TBD</span></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:var(--space-1)"><span class="ticker-chip">BABA</span><span style="font-size:0.85rem;color:var(--text-muted)">TBD</span></div>
+        <div style="display:flex;justify-content:space-between"><span class="ticker-chip">MRK</span><span style="font-size:0.85rem;color:var(--text-muted)">TBD</span></div>
+      </div>
+    </div>
+
+    <h3 class="reveal" style="margin-bottom:var(--space-4)">Whisper Signals</h3>
+    <div class="grid-4 reveal" style="margin-bottom:var(--space-8)">
+      <div class="card"><span class="badge badge-bullish">Bullish</span><h4 style="margin-top:var(--space-3)">PANW</h4><p style="font-size:0.85rem;color:var(--text-muted);margin-top:var(--space-2)">Unusual call buying at $200 strike. 2.1x average options volume. Implied move 6.2%.</p></div>
+      <div class="card"><span class="badge badge-bullish">Bullish</span><h4 style="margin-top:var(--space-3)">CEG</h4><p style="font-size:0.85rem;color:var(--text-muted);margin-top:var(--space-2)">Whisper estimate $2.55 vs consensus $2.28. Three analyst upgrades in past week.</p></div>
+      <div class="card"><span class="badge badge-bearish">Bearish</span><h4 style="margin-top:var(--space-3)">LUNR</h4><p style="font-size:0.85rem;color:var(--text-muted);margin-top:var(--space-2)">$2.2M insider selling in the past 10 days. CFO and COO both trimming positions.</p></div>
+      <div class="card"><span class="badge badge-bearish">Bearish</span><h4 style="margin-top:var(--space-3)">DVN</h4><p style="font-size:0.85rem;color:var(--text-muted);margin-top:var(--space-2)">Concentrated put flow at $42 strike. Bearish skew intensifying ahead of print.</p></div>
+    </div>
+
+    <h3 class="reveal" style="margin-bottom:var(--space-4)">High Conviction Plays</h3>
+    <div class="grid-3 reveal">
+      <div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-3)"><h4>CEG Long</h4><span style="font-weight:700;color:var(--primary)">8/10</span></div><p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:var(--space-3)">Whisper beat + nuclear energy policy catalyst. Buy calls pre earnings.</p><div class="score-bar-track"><div class="score-bar-fill" data-width="80"></div></div></div>
+      <div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-3)"><h4>PANW Long</h4><span style="font-weight:700;color:var(--primary)">7/10</span></div><p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:var(--space-3)">Options flow strongly bullish. Cybersecurity spending accelerating.</p><div class="score-bar-track"><div class="score-bar-fill" data-width="70"></div></div></div>
+      <div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-3)"><h4>LUNR Short</h4><span style="font-weight:700;color:var(--primary)">7/10</span></div><p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:var(--space-3)">Insider selling cluster signals weak guidance. Buy puts for earnings.</p><div class="score-bar-track"><div class="score-bar-fill" data-width="70"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PANEL 3: NEWS -->
+<section class="panel" id="panel-news">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2><span class="live-dot"></span> News Arbitrage Alerts</h2>
+      <p>Real time scanning of SEC filings, press releases, and breaking news for tradeable events.</p>
+    </div>
+
+    <div class="reveal">
+      <div class="timeline-item">
+        <div class="timeline-time">08:12 EST</div>
+        <div class="timeline-content card">
+          <span class="badge badge-bullish" style="margin-bottom:var(--space-3)">Bullish</span>
+          <h4 style="margin-top:var(--space-2)">CFLT/IBM Partnership Expanded, Merger Talks Confirmed</h4>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:var(--space-2)">Confluent and IBM announce expanded strategic partnership with confirmed merger discussions. Deal valued at approximately $9.2B. Regulatory approval expected within 90 days given complementary product lines.</p>
+          <div style="margin-top:var(--space-3)"><span class="ticker-chip">CFLT</span><span class="ticker-chip">IBM</span></div>
+          <div style="font-size:0.8rem;color:var(--accent);margin-top:var(--space-2)">Action window: Immediate. Pre market gap likely.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">09:03 EST</div>
+        <div class="timeline-content card">
+          <span class="badge badge-mixed" style="margin-bottom:var(--space-3)">Mixed</span>
+          <h4 style="margin-top:var(--space-2)">Spotify Beats Q4 Estimates, CFO Departure Announced</h4>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:var(--space-2)">Revenue beat of 4.2% offset by surprise CFO resignation effective March 31. Subscriber growth strong at 246M premium, but margin guidance lowered for Q1 due to podcast investment ramp.</p>
+          <div style="margin-top:var(--space-3)"><span class="ticker-chip">SPOT</span></div>
+          <div style="font-size:0.8rem;color:var(--accent);margin-top:var(--space-2)">Action window: Wait for post earnings volatility to settle.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">10:17 EST</div>
+        <div class="timeline-content card">
+          <span class="badge badge-watch" style="margin-bottom:var(--space-3)">Watch</span>
+          <h4 style="margin-top:var(--space-2)">AMAT Files 8K: Material Event Disclosure</h4>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:var(--space-2)">Applied Materials filed an 8K disclosing a material event related to export control compliance. Details sparse, but historically these filings precede government action or settlement announcements.</p>
+          <div style="margin-top:var(--space-3)"><span class="ticker-chip">AMAT</span><span class="ticker-chip">LRCX</span><span class="ticker-chip">KLAC</span></div>
+          <div style="font-size:0.8rem;color:var(--accent);margin-top:var(--space-2)">Action window: Monitor for follow up filing within 48 hours.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">11:44 EST</div>
+        <div class="timeline-content card">
+          <span class="badge badge-bearish" style="margin-bottom:var(--space-3)">Bearish</span>
+          <h4 style="margin-top:var(--space-2)">ServiceNow Insider Cluster Selling Detected</h4>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-top:var(--space-2)">Four C suite executives sold a combined $18.7M in shares over 3 days. Largest coordinated insider sale in 18 months. Often precedes guidance revision or strategic announcement.</p>
+          <div style="margin-top:var(--space-3)"><span class="ticker-chip">NOW</span></div>
+          <div style="font-size:0.8rem;color:var(--accent);margin-top:var(--space-2)">Action window: Consider protective puts if holding long position.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="recap-card reveal">
+      <h3 style="margin-bottom:var(--space-3)">Daily Recap</h3>
+      <p style="font-size:0.9rem;color:var(--text-muted)">Four actionable alerts detected today. One high conviction bullish (CFLT merger), one mixed signal (SPOT), one monitoring (AMAT filing), and one bearish cluster (NOW insiders). Net market tone: cautiously optimistic with sector specific risks in semiconductors.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PANEL 4: MACRO -->
+<section class="panel" id="panel-macro">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Macro Regime Dashboard</h2>
+      <p>Tracking the indicators that drive cross asset allocation and regime shifts.</p>
+    </div>
+
+    <div style="text-align:center;margin-bottom:var(--space-12)" class="reveal">
+      <div class="regime-badge">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        CAUTIOUS ROTATION
+      </div>
+    </div>
+
+    <div class="grid-7 reveal" style="margin-bottom:var(--space-12)">
+      <div class="card indicator-card"><div class="label">VIX</div><div class="value" style="color:var(--error)">21.84</div><div class="change" style="color:var(--error)"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--error)"><path d="M12 2l10 18H2z"/></svg> +2.3 WoW</div></div>
+      <div class="card indicator-card"><div class="label">DXY</div><div class="value" style="color:var(--success)">97.12</div><div class="change" style="color:var(--success)"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--success)"><path d="M12 22L2 4h20z"/></svg> 1.8 WoW</div></div>
+      <div class="card indicator-card"><div class="label">10Y Yield</div><div class="value" style="color:var(--success)">4.056%</div><div class="change" style="color:var(--success)"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--success)"><path d="M12 22L2 4h20z"/></svg> 12bp WoW</div></div>
+      <div class="card indicator-card"><div class="label">2s10s Spread</div><div class="value" style="color:var(--success)">+58bp</div><div class="change" style="color:var(--success)"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--success)"><path d="M12 2l10 18H2z"/></svg> +8bp WoW</div></div>
+      <div class="card indicator-card"><div class="label">Crude Oil</div><div class="value" style="color:var(--error)">$63.31</div><div class="change" style="color:var(--error)"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--error)"><path d="M12 2l10 18H2z"/></svg> +$2.40 WoW</div></div>
+      <div class="card indicator-card"><div class="label">Gold</div><div class="value" style="color:var(--success)">$4,945</div><div class="change" style="color:var(--success)"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--success)"><path d="M12 22L2 4h20z"/></svg> $62 WoW</div></div>
+      <div class="card indicator-card"><div class="label">Bitcoin</div><div class="value" style="color:var(--text-muted)">$68,880</div><div class="change" style="color:var(--text-muted)">&#x2192; Flat WoW</div></div>
+    </div>
+
+    <div class="grid-2 reveal" style="margin-bottom:var(--space-12)">
+      <div class="weight-list overweight">
+        <h3 style="color:var(--success)">Overweight</h3>
+        <div class="weight-item">Utilities (defensive + AI power demand)</div>
+        <div class="weight-item">Healthcare (rate cut beneficiary)</div>
+        <div class="weight-item">Gold Miners (inflation hedge)</div>
+        <div class="weight-item">Short Duration Bonds (yield capture)</div>
+      </div>
+      <div class="weight-list underweight">
+        <h3 style="color:var(--error)">Underweight</h3>
+        <div class="weight-item">Commercial Real Estate REITs</div>
+        <div class="weight-item">Regional Banks (NIM pressure)</div>
+        <div class="weight-item">Consumer Discretionary (spending fatigue)</div>
+        <div class="weight-item">Long Duration Treasuries</div>
+      </div>
+    </div>
+
+    <h3 class="reveal" style="margin-bottom:var(--space-4)">Scenario Probabilities</h3>
+    <div class="card reveal">
+      <div class="prob-bar"><div class="prob-label">Goldilocks</div><div class="prob-track"><div class="prob-fill" data-width="50" style="background:var(--success)"></div></div><div class="prob-value">50%</div></div>
+      <div class="prob-bar"><div class="prob-label">Tariff Shock</div><div class="prob-track"><div class="prob-fill" data-width="30" style="background:var(--warning)"></div></div><div class="prob-value">30%</div></div>
+      <div class="prob-bar"><div class="prob-label">Sticky Inflation</div><div class="prob-track"><div class="prob-fill" data-width="20" style="background:var(--error)"></div></div><div class="prob-value">20%</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PANEL 5: COPYCAT -->
+<section class="panel" id="panel-copycat">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Copycat Fund Tracker</h2>
+      <p>Tracking 13F filings and position changes from the world's top hedge funds and asset managers.</p>
+    </div>
+
+    <div class="h-scroll reveal" style="margin-bottom:var(--space-8)">
+      <div class="card fund-card"><div class="fund-name">Bridgewater Associates</div><div class="fund-action">Dumped GOOGL/META, rotated into NVDA/ORCL</div><div class="fund-amount">$461M rotation</div></div>
+      <div class="card fund-card"><div class="fund-name">Pershing Square</div><div class="fund-action">New concentrated META position, largest single bet in 3 years</div><div class="fund-amount">$1.5B new position</div></div>
+      <div class="card fund-card"><div class="fund-name">Baupost Group</div><div class="fund-action">Surprise AMZN accumulation, first tech position since 2019</div><div class="fund-amount">$490M position</div></div>
+      <div class="card fund-card"><div class="fund-name">Renaissance Technologies</div><div class="fund-action">Building housing and rate cut beneficiary basket</div><div class="fund-amount">Multi sector basket</div></div>
+      <div class="card fund-card"><div class="fund-name">Baillie Gifford</div><div class="fund-action">Rotating from US tech into LatAm growth equities</div><div class="fund-amount">Regional rotation</div></div>
+    </div>
+
+    <div class="grid-2 reveal" style="margin-bottom:var(--space-8)">
+      <div class="card">
+        <div class="consensus-list">
+          <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> Consensus Buys</h3>
+          <div class="consensus-item"><span>AMZN</span><span style="color:var(--success)">3 funds buying</span></div>
+          <div class="consensus-item"><span>NVDA</span><span style="color:var(--success)">2 funds buying</span></div>
+          <div class="consensus-item"><span>ORCL</span><span style="color:var(--success)">2 funds buying</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="consensus-list">
+          <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--error)" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg> Consensus Exits</h3>
+          <div class="consensus-item"><span>GOOGL</span><span style="color:var(--error)">2 funds selling</span></div>
+          <div class="consensus-item"><span>META</span><span style="color:var(--error)">1 fund selling</span></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="reveal" style="margin-bottom:var(--space-4)">Follow the Money</h3>
+    <div class="grid-3 reveal">
+      <div class="card idea-card"><span class="badge badge-bullish" style="margin-bottom:var(--space-2)">Actionable</span><h4 style="margin-top:var(--space-2)">AMZN Accumulation Play</h4><p style="margin-top:var(--space-2)">Three top funds initiated or added. Baupost's first tech buy in years signals deep value conviction. Consider scaling in on pullbacks.</p></div>
+      <div class="card idea-card"><span class="badge badge-bullish" style="margin-bottom:var(--space-2)">Actionable</span><h4 style="margin-top:var(--space-2)">NVDA/ORCL AI Pair</h4><p style="margin-top:var(--space-2)">Bridgewater's rotation from big tech into AI infrastructure names. Hardware + cloud stack. Consider basket approach.</p></div>
+      <div class="card idea-card"><span class="badge badge-mixed" style="margin-bottom:var(--space-2)">Monitor</span><h4 style="margin-top:var(--space-2)">META Divergence</h4><p style="margin-top:var(--space-2)">Bridgewater selling while Pershing Square makes a massive buy. Conflicting signals suggest wait for Q1 earnings clarity.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container reveal">
+    <h2>Ready to automate your edge?</h2>
+    <p>Set up your Mac Mini with OpenClaw and start receiving intelligence reports tomorrow.</p>
+    <button class="cta-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      Get Started
+    </button>
+  </div>
+</section>
 
 <!-- FOOTER -->
-<footer class="footer">
-  <div class="brand">Powered by OpenClaw on Mac Mini</div>
-  <div>Autonomous trading intelligence. Running 24/7 so you don't have to.</div>
-  <div style="margin-top:12px;color:var(--text-muted);font-size:11px">All data shown is illustrative. Not financial advice. Reports generated by AI agents with human oversight.</div>
+<footer>
+  <div class="container">
+    <div class="brand">Powered by OpenClaw on Mac Mini</div>
+    <div class="disclaimer">All data sourced from public APIs. Not financial advice.</div>
+  </div>
 </footer>
 
 <script>
 // Tab switching
-function switchTab(tabId) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.demo-panel').forEach(p => p.classList.remove('active'));
-  document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
-  document.getElementById(`panel-${tabId}`).classList.add('active');
-}
+const tabs = document.querySelectorAll('.tab-pill');
+const panels = document.querySelectorAll('.panel');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    panels.forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    const panel = document.getElementById('panel-' + tab.dataset.tab);
+    panel.classList.add('active');
+    // Trigger reveals in new panel
+    panel.querySelectorAll('.reveal').forEach(el => {
+      observer.observe(el);
+    });
+    // Animate bars
+    setTimeout(() => animateBars(panel), 100);
+  });
+});
 
-// Animated counters
-function animateCounters() {
-  document.querySelectorAll('.counter').forEach(el => {
-    const target = +el.dataset.target;
-    const duration = 1500;
-    const start = performance.now();
-    function update(now) {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(eased * target);
-      if (progress < 1) requestAnimationFrame(update);
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
     }
-    requestAnimationFrame(update);
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Animate bars
+function animateBars(root) {
+  root.querySelectorAll('.heat-bar-fill[data-width]').forEach(bar => {
+    bar.style.width = bar.dataset.width + '%';
+  });
+  root.querySelectorAll('.score-bar-fill[data-width]').forEach(bar => {
+    bar.style.width = bar.dataset.width + '%';
+  });
+  root.querySelectorAll('.prob-fill[data-width]').forEach(bar => {
+    bar.style.width = bar.dataset.width + '%';
   });
 }
 
-// Intersection observer for fade-ins
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.card, .alert-item').forEach(el => {
-  el.classList.add('fade-in');
-  observer.observe(el);
-});
+// Initial animation
+setTimeout(() => animateBars(document.getElementById('panel-sentiment')), 500);
 
-// Init
-animateCounters();
+// Counter animation
+const countEl = document.querySelector('[data-count]');
+if (countEl) {
+  let start = 0;
+  const end = parseInt(countEl.dataset.count);
+  const step = () => {
+    start++;
+    countEl.textContent = start;
+    if (start < end) requestAnimationFrame(step);
+  };
+  setTimeout(step, 800);
+}
 </script>
 </body>
 </html>
