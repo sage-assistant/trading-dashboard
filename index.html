@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#08090E">
 <title>Trading Intelligence Suite</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -131,16 +134,79 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 .ow-card li,.uw-card li{padding:6px 0;font-size:13px;color:var(--text-dim);list-style:none;border-bottom:1px solid rgba(255,255,255,0.04)}
 .ow-card li:last-child,.uw-card li:last-child{border:none}
 /* MOBILE */
+/* TABLET */
 @media(max-width:768px){
-.sidebar{top:auto;bottom:0;left:0;right:0;width:100%!important;height:60px;flex-direction:row;border-right:none;border-top:1px solid var(--border);z-index:100}
-.sidebar:hover{width:100%!important}
-.sidebar-nav{display:flex;flex-direction:row;padding:0;justify-content:space-around;align-items:center}
-.nav-item{flex-direction:column;padding:8px;gap:2px}.nav-item span{opacity:1!important;font-size:9px}
-.nav-item.active::before{left:8px;right:8px;top:auto;bottom:0;width:auto;height:3px;border-radius:3px 3px 0 0}
-.sidebar-footer{display:none}
-.main{left:0;bottom:60px}
-.g5{grid-template-columns:repeat(2,1fr)}.g4{grid-template-columns:repeat(2,1fr)}
+.topbar{padding:0 16px;height:48px}
+.topbar-title{font-size:13px}
+.topbar-center .live-label{display:none}
+.topbar-right #date-display{display:none}
+.topbar-time{font-size:12px}
 .statusbar{display:none}
+/* BOTTOM TAB BAR */
+.sidebar{top:auto;bottom:0;left:0;right:0;width:100%!important;height:64px;flex-direction:row;border-right:none;border-top:1px solid var(--border);z-index:200;background:var(--bg-light)}
+.sidebar:hover{width:100%!important}
+.sidebar-nav{display:flex;flex-direction:row;padding:0 4px;justify-content:space-around;align-items:center;height:100%;padding-bottom:env(safe-area-inset-bottom)}
+.nav-item{flex-direction:column;padding:6px 4px;gap:3px;min-width:44px;min-height:44px;justify-content:center;align-items:center;border-radius:12px}
+.nav-item span{opacity:1!important;font-size:10px;font-weight:500}
+.nav-item svg{width:22px;height:22px;min-width:22px}
+.nav-item.active{background:rgba(124,58,237,0.15);color:var(--purple)}
+.nav-item.active::before{content:'';position:absolute;left:50%;transform:translateX(-50%);right:auto;top:auto;bottom:0;width:24px;height:3px;border-radius:3px 3px 0 0;background:var(--purple)}
+.sidebar-footer{display:none}
+/* MAIN AREA */
+.main{left:0;top:48px;bottom:64px}
+.panel{padding:16px;-webkit-overflow-scrolling:touch}
+/* GRIDS: single column */
+.g2,.g3,.g4,.g5,.g-wide-narrow{grid-template-columns:1fr}
+.grid{gap:12px}
+/* CARDS */
+.card{padding:16px;border-radius:16px}
+.card-value{font-size:clamp(1.4rem,5vw,2.2rem)}
+.big-num{font-size:clamp(2rem,6vw,3rem)}
+/* TICKER GRID: 2 col with last centered */
+#ticker-grid{grid-template-columns:repeat(2,1fr)}
+#ticker-grid .card:last-child{grid-column:1/-1;max-width:50%;justify-self:center}
+/* GAUGE smaller on mobile */
+.gauge{width:64px;height:64px}
+.gauge svg{width:64px;height:64px}
+.gauge-text{font-size:15px}
+/* REGIME BADGE */
+.regime-badge{font-size:0.85rem;padding:10px 20px}
+/* INDICATOR CARDS: 2 col */
+#panel-macro .grid.g4{grid-template-columns:repeat(2,1fr)}
+#panel-macro .grid.g3{grid-template-columns:1fr 1fr 1fr}
+/* HORIZONTAL SCROLLS: touch friendly */
+.timeline,.hscroll{-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;padding-bottom:12px}
+.timeline>*,.hscroll>*{scroll-snap-align:start}
+.tl-item{min-width:120px}
+.fund-card{min-width:160px}
+/* ALERTS */
+.alert-item{flex-direction:column;gap:8px;padding:14px 16px}
+.alert-time{min-width:auto}
+/* CONVICTION */
+.conviction-circle{width:60px;height:60px;font-size:1.2rem}
+/* OW/UW */
+.ow-card,.uw-card{padding:14px}
+/* ORBS: smaller on mobile */
+.orb{opacity:0.6;transform:scale(0.6)}
+/* PROB BAR text */
+.prob-bar{margin-top:6px}
+/* TOPBAR center: just show dot */
+.topbar-center span:not(.live-dot){font-size:11px}
+/* Prevent horizontal overflow */
+.panel>*{max-width:100%;overflow-x:hidden}
+.timeline,.hscroll{overflow-x:auto;max-width:100%}
+}
+/* SMALL PHONE */
+@media(max-width:390px){
+.topbar-title{display:none}
+#ticker-grid{grid-template-columns:1fr 1fr}
+#ticker-grid .card:last-child{max-width:100%}
+.ticker-card .sym{font-size:1.1rem}
+.ticker-card .price{font-size:0.75rem}
+#panel-macro .grid.g3{grid-template-columns:1fr}
+.nav-item span{font-size:9px}
+.nav-item svg{width:20px;height:20px;min-width:20px}
+.card-label{font-size:0.65rem}
 }
 /* COUNT UP */
 .count-up{display:inline-block}
@@ -153,7 +219,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
 <span class="topbar-title">Trading Intelligence Suite</span>
 </div>
-<div class="topbar-center"><span class="live-dot"></span><span>Market Open</span></div>
+<div class="topbar-center"><span class="live-dot"></span><span class="live-label">Market Open</span></div>
 <div class="topbar-right"><div class="topbar-time" id="clock"></div><div id="date-display"></div></div>
 </div>
 
